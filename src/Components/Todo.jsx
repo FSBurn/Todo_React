@@ -4,7 +4,7 @@ function Todo() {
 
     const [count, setCount] = useState(0);
     const [divArr, setDivArr] = useState([]);
-    console.log(count)
+
 
     return (
         <div>
