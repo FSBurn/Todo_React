@@ -2,24 +2,27 @@ import React, {useState} from 'react';
 
 function Todo() {
 
-    const [count, setCount] = useState(0);
     const [divArr, setDivArr] = useState([]);
 
-
-
-
+    const addCard = () => {
+        const newArray = [ ...divArr, {title: '11', id: Date.now()}];
+        setDivArr(newArray)
+    }
+    const removeCard = () => {
+        setDivArr(divArr.filter((element, index) => index < divArr.length - 1))
+    }
     return (
         <div>
-            <button onClick={() => (setCount(count + 1), setDivArr(divArr.concat(count + 1)))}>
-                Add
+            <button onClick={() => {
+                addCard()
+            }}>Add
             </button>
-            <button onClick={() => (setCount(count > 0 ? count - 1 : null), setDivArr({divArr} = divArr.pop()))}>
-                Delete
+            <button onClick={() => {
+                removeCard()
+            }}>Delete
             </button>
-
-            <div>{count ? divArr.map((newDiv) => <div key={''}>{newDiv}</div>) : "empty list"}</div>
-
-
+            <div>{divArr.length ? divArr.map((newDiv, index) => <div
+                key={index}>{index+1}</div>) : "empty list"}</div>
         </div>
     );
 }
