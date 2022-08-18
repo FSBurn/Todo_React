@@ -25,7 +25,7 @@ export default function Todo() {
     };
 
     const removeCard = (event) => {
-        setCards(cards.filter(element => element.id != event.target.id))
+        setCards(cards.filter(element => element.id !== Number(event.target.id)))
     }
     return (
         <div>
