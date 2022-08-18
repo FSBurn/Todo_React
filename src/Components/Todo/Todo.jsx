@@ -25,11 +25,10 @@ export default function Todo() {
     };
 
     const removeCard = (event) => {
-        setCards(cards.filter(element => (element.id !== event.target.id) ? element : null))
+        setCards(cards.filter(element => element.id != event.target.id))
     }
     return (
         <div>
-
             <div className={styles.todoContainer}>
                 <TodoHeader cards={cards}/>
                 <TodoCard cards={cards} removeCard={removeCard}/>
