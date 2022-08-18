@@ -1,41 +1,40 @@
 import React, {useState} from 'react';
-import "./Todo.css"
+import styles from "./Todo.module.css"
+import TodoHeader from "./TodoHeader/TodoHeader";
+import TodoCard from "./TodoCard/TodoCard";
+import TodoSubmit from "./TodoSubmit/TodoSubmit";
 
-function Todo() {
+export default function Todo() {
 
     const [cards, setCards] = useState([]);
+    let newCardTitle = {};
 
     const addCard = (event) => {
-        const newArray = [...cards,
-            {
-                title: "event.target.value",
-                id: Date.now()
-            }];
-        setCards(newArray)
         event.preventDefault()
-    }
-    const removeCard = () => {
-        setCards(cards.filter((element, index) => index < cards.length - 1))
+        setCards([...cards,
+            {
+                title: newCardTitle.title,
+                id: Date.now()
+            }
+        ])
+    };
+    const changeCard = (event) => {
+        newCardTitle = {
+            title: event.target.value
+        }
+    };
+
+    const removeCard = (event) => {
+        setCards(cards.filter(element => (element.id !== event.target.id) ? element : null))
     }
     return (
         <div>
-            <div className="todoContainer">
-            <div className={"padding10"}>{cards.length ? <div>You have {cards.length} Todos</div> : null}</div>
 
-            <div>{cards.length ? cards.map((newDiv, index) => <div className={"todoItem padding10 gray_line"}
-                key={index}>Task: {index + 1}
-                <button className={"card_button"} onClick={removeCard}>X
-                </button>
-            </div>) : "empty list"}</div>
-            <form onSubmit={addCard} className={"todoItem padding10"}>
-                <label>
-                    <input  className={"input_size"} type="text" placeholder={"Enter item"} />
-                </label>
-                <input className={"submit_button"} type="submit" value="Submit" />
-            </form>
+            <div className={styles.todoContainer}>
+                <TodoHeader cards={cards}/>
+                <TodoCard cards={cards} removeCard={removeCard}/>
+                <TodoSubmit addCard={addCard} changeCard={changeCard}/>
             </div>
         </div>
     );
 }
-
-export default Todo;

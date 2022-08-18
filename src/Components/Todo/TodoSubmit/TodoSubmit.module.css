@@ -1,0 +1,22 @@
+.todoItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+
+}
+.input_size{
+    width: 450px;
+    height: 30px;
+    padding: 0 5px;
+    font-size: 22px;
+    border:1px solid #dbd5d5;
+    border-radius: 5px;
+}
+.submit_button{
+    width: 110px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #dbd5d5;
+    color: #716e6e;
+}
