@@ -1,12 +1,12 @@
-import './App.css';
 import Todo from "./Components/Todo/Todo";
+import React from "react";
 
 function App() {
     return (
-        <div className="App">
-        <Todo/>
+        <div>
+            <Todo />
         </div>
-);
+    );
 }
 
 export default App;
