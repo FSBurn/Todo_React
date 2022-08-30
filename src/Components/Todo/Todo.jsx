@@ -6,14 +6,16 @@ import TodoSubmit from "./TodoSubmit/TodoSubmit";
 import {CARDS_KEY} from "../../Constants/localStorageKeys"
 
 export default function Todo() {
-    const [cards, setCards] = useState(localStorage.getItem(CARDS_KEY) ? () => {
+    const localStorageItems = () => {
         try {
-            const localStorageData = localStorage.getItem(CARDS_KEY);
-            return JSON.parse(localStorageData);
+            return localStorage.getItem(CARDS_KEY) ?
+                JSON.parse(localStorage.getItem(CARDS_KEY))
+                : []
         } catch (e) {
             console.log(e)
         }
-    } : []);
+    }
+    const [cards, setCards] = useState(localStorageItems)
 
     const addCard = (value) => {
         setCards([...cards, {
@@ -26,13 +28,13 @@ export default function Todo() {
         setCards(cards.filter(element => element.id !== Number(event.target.id)))
     }
 
-    try {
-        useEffect(() => {
+    useEffect(() => {
+        try {
             localStorage.setItem(CARDS_KEY, JSON.stringify(cards));
-        }, [cards]);
-    } catch (e) {
-        console.log(e)
-    }
+        } catch (e) {
+            console.log(e)
+        }
+    }, [cards]);
 
     return (
         <div>
