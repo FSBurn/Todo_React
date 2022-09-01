@@ -6,16 +6,21 @@ import TodoSubmit from "./TodoSubmit/TodoSubmit";
 import {CARDS_KEY} from "../../Constants/localStorageKeys"
 
 export default function Todo() {
-    const localStorageItems = () => {
+    const [cards, setCards] = useState(() => {
+        let initState = [];
+
         try {
-            return localStorage.getItem(CARDS_KEY) ?
-                JSON.parse(localStorage.getItem(CARDS_KEY))
-                : []
+            const data = localStorage.getItem(CARDS_KEY);
+
+            if (data) {
+                initState = JSON.parse(data);
+            }
         } catch (e) {
             console.log(e)
         }
-    }
-    const [cards, setCards] = useState(localStorageItems)
+
+        return initState;
+    })
 
     const addCard = (value) => {
         setCards([...cards, {
