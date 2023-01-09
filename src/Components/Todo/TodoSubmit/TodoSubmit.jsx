@@ -1,19 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from "./TodoSubmit.module.css"
 
-export default function TodoSubmit({addCard}) {
-    const [inputValue, setInputValue] = useState("");
-
-    const inputChange = (event) =>  {
-        setInputValue(event.target.value);
-    }
-
-    const handleSubmit = (event)=>{
-        event.preventDefault()
-
-        addCard(inputValue)
-        setInputValue("")
-    }
+export default function TodoSubmit({handleSubmit, inputChange, inputValue}) {
 
     return (
         <form onSubmit={handleSubmit} className={styles.todoItem}>
